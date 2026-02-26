@@ -9,12 +9,19 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+The game over state can be cleared by pressing the down button a couple of times.
 
 ## How to test
 
-Explain how to use your project
+To control the game, toggle inputs ui_in[0 to 3]. 
+Note: 
+    The inputs are expected to be HIGH (i.e. pulled-up) when not used, hence only LOW level is associated with an action.
+    On RP2040's MicroPython shell this can be achieved by:
+        tt.pins.ui_in0.pull = Pin.PULL_UP
+        tt.pins.ui_in1.pull = Pin.PULL_UP
+        tt.pins.ui_in2.pull = Pin.PULL_UP
+        tt.pins.ui_in3.pull = Pin.PULL_UP
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+Use https://github.com/mole99/tiny-vga for display output
