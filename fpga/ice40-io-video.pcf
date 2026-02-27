@@ -1,0 +1,18 @@
+set_io CLK100MHz J3
+# set_io button_1 K11
+# set_io button_2 P13
+set_io vga_r[0] E3
+set_io vga_r[1] H5
+set_io vga_r[2] F3
+set_io vga_g[0] H3
+set_io vga_g[1] F2
+set_io vga_g[2] H6
+set_io vga_b[0] F1
+set_io vga_b[1] H4
+set_io vga_b[2] G2
+set_io vga_hs J4
+set_io vga_vs H2
+set_io button_1 J5
+set_io button_2 G1
+set_io button_3 H1
+set_io button_4 J2

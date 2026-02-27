@@ -1555,21 +1555,21 @@ module TetrisGameOverLogic(
 );
 
   reg        inGameOverStateQ;
-  reg  [1:0] buttonPressesCounterQ;
+  reg  [2:0] buttonPressesCounterQ;
   wire       inGameOverStateD =
-    io_enterGameOverState | ~(inGameOverStateQ & buttonPressesCounterQ == 2'h1)
+    io_enterGameOverState | ~(inGameOverStateQ & buttonPressesCounterQ == 3'h3)
     & inGameOverStateQ;
   always @(posedge clock) begin
     if (reset) begin
       inGameOverStateQ <= 1'h0;
-      buttonPressesCounterQ <= 2'h0;
+      buttonPressesCounterQ <= 3'h0;
     end
     else begin
       inGameOverStateQ <= inGameOverStateD;
       if (io_enterGameOverState)
-        buttonPressesCounterQ <= 2'h0;
+        buttonPressesCounterQ <= 3'h0;
       else if (inGameOverStateQ)
-        buttonPressesCounterQ <= buttonPressesCounterQ + {1'h0, io_downButtonActive};
+        buttonPressesCounterQ <= buttonPressesCounterQ + {2'h0, io_downButtonActive};
     end
   end // always @(posedge)
   assign io_inGameOverState = inGameOverStateQ;
