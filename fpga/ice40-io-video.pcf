@@ -16,3 +16,4 @@ set_io button_1 J5
 set_io button_2 G1
 set_io button_3 H1
 set_io button_4 J2
+set_io vgb_rgb_data_enable G3

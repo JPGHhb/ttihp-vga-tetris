@@ -24,8 +24,13 @@ async def test_project(dut):
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 10)
     dut.rst_n.value = 1
+    await ClockCycles(dut.clk, 1)
 
     dut._log.info("Test project behavior")
+
+    assert get_bit(dut.uio_oe, 0) == 1
+    for bit_idx in range(1, 8):
+        assert get_bit(dut.uio_oe, bit_idx) == 0
 
     # Wait for one clock cycle to see the output values
     await ClockCycles(dut.clk, 100)
@@ -38,6 +43,12 @@ async def test_project(dut):
     
     # VGA VSync
     assert get_bit(dut.uo_out, 3) == 1
+
+    # VGA RGB data valid
+    assert get_bit(dut.uio_out, 0) == 1
+    
+    await ClockCycles(dut.clk, 550)
+    assert get_bit(dut.uio_out, 0) == 0
 
     # Keep testing the module by changing the input values, waiting for
     # one or more clock cycles, and asserting the expected output values.

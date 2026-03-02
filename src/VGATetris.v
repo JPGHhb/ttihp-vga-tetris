@@ -2006,6 +2006,7 @@ module VGATetris(
                io_vgaB,
   output       io_vgaHs,
                io_vgaVs,
+               io_vgaVisiblePixels,
   output [9:0] io_pxX,
                io_pxY
 );
@@ -2127,6 +2128,7 @@ module VGATetris(
     .io_done               (_tetrisLogic_io_done)
   );
   assign io_vgaVs = _vgaController_io_vSync;
+  assign io_vgaVisiblePixels = _vgaController_io_pixelPosIsValid;
   assign io_pxX = _vgaController_io_pixelPosX;
   assign io_pxY = _vgaController_io_pixelPosY;
 endmodule

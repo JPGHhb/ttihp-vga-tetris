@@ -1,16 +1,17 @@
 `default_nettype none  //disable implicit definitions by Verilog
 
 module vga_tetris_top (  //top module and signals wired to FPGA pins
-    input        CLK100MHz,  // Oscillator input 100Mhz
+    input        CLK100MHz,           // Oscillator input 100Mhz
     input        button_1,
     input        button_2,
     input        button_3,
     input        button_4,
-    output [2:0] vga_r,      // VGA Red 3 bit
-    output [2:0] vga_g,      // VGA Green 3 bit
-    output [2:0] vga_b,      // VGA Blue 3 bit
-    output       vga_hs,     // H-sync pulse
-    output       vga_vs      // V-sync pulse
+    output [2:0] vga_r,               // VGA Red 3 bit
+    output [2:0] vga_g,               // VGA Green 3 bit
+    output [2:0] vga_b,               // VGA Blue 3 bit
+    output       vga_hs,              // H-sync pulse
+    output       vga_vs,              // V-sync pulse
+    output       vgb_rgb_data_enable
 );
 
   wire pll_locked;
@@ -57,19 +58,20 @@ module vga_tetris_top (  //top module and signals wired to FPGA pins
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
 
-  assign ui_in[0]   = button_1;
-  assign ui_in[1]   = button_2;
-  assign ui_in[2]   = button_3;
-  assign ui_in[3]   = button_4;
+  assign ui_in[0]            = button_1;
+  assign ui_in[1]            = button_2;
+  assign ui_in[2]            = button_3;
+  assign ui_in[3]            = button_4;
 
-  assign io_vgaR[1] = uo_out[0];
-  assign io_vgaG[1] = uo_out[1];
-  assign io_vgaB[1] = uo_out[2];
-  assign vga_vs     = uo_out[3];
-  assign io_vgaR[0] = uo_out[4];
-  assign io_vgaG[0] = uo_out[5];
-  assign io_vgaB[0] = uo_out[6];
-  assign vga_hs     = uo_out[7];
+  assign io_vgaR[1]          = uo_out[0];
+  assign io_vgaG[1]          = uo_out[1];
+  assign io_vgaB[1]          = uo_out[2];
+  assign vga_vs              = uo_out[3];
+  assign io_vgaR[0]          = uo_out[4];
+  assign io_vgaG[0]          = uo_out[5];
+  assign io_vgaB[0]          = uo_out[6];
+  assign vga_hs              = uo_out[7];
+  assign vgb_rgb_data_enable = uio_out[0];
 
   tt_um_vga_tetris tetris (
       .ui_in (ui_in),  // Dedicated inputs

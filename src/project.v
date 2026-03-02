@@ -16,9 +16,14 @@ module tt_um_vga_tetris (
     input  wire       rst_n     // reset_n - low to reset
 );
 
+  wire vga_rgb_data_enable;
+
+  assign uio_out[0] = vga_rgb_data_enable;
+  assign uio_oe[0]  = 1'b1;
+
   // All output pins must be assigned. If not used, assign to 0.
-  assign uio_out = 0;
-  assign uio_oe  = 0;
+  assign uio_out[7:1] = 0;
+  assign uio_oe[7:1] = 0;
 
   wire left;
   wire right;
@@ -56,7 +61,8 @@ module tt_um_vga_tetris (
       .io_vgaG(g_color),
       .io_vgaB(b_color),
       .io_vgaHs(vga_hs),
-      .io_vgaVs(vga_vs)
+      .io_vgaVs(vga_vs),
+      .io_vgaVisiblePixels(vga_rgb_data_enable)
   );
 
   // List all unused inputs to prevent warnings
